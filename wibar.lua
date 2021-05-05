@@ -7,12 +7,11 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 
 local config = require('config')
+local modkey = config.modkey
 
-
-modkey = config.modkey
-
-
-mytextclock = wibox.widget.textclock()
+local launcher = require('widget.launcher')
+local keyboardLayout = require('widget.keyboardLayout')
+local textClock = require('widget.textClock')
 
 
 local taglist_buttons = gears.table.join(
@@ -35,7 +34,6 @@ local taglist_buttons = gears.table.join(
     awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
-
 
 local tasklist_buttons = gears.table.join(
     awful.button({ }, 1, 
@@ -122,16 +120,16 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            launcher,
             s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            keyboardLayout,
             wibox.widget.systray(),
-            mytextclock,
+            textClock,
             s.mylayoutbox,
         },
     }
