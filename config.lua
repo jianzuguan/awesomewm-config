@@ -1,5 +1,5 @@
 
-local terminal = "konsole"
+local terminal = "kitty"
 local editor = os.getenv("EDITOR") or "editor"
 local editor_cmd = terminal .. " -e " .. editor
 
